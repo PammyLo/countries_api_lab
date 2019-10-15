@@ -11,13 +11,22 @@
     <div id="app">
       <h1>Countries</h1>
       <p>Total population: {{ totalPopulation }}</p>
-        <button v-on:click="fetchCountries">Show all countries</button>
+
+      <form id="select-country">
+        <label for="country">Choose a Country for more information:</label>
+        <select id="country">
+          <option v-for="(country, index) in countries">{{ country.name }}</option>
+        </select>
+        <input type="submit" value="show me this country">
+      </form>
 
         <ul>
         <li v-for="(country, index) in countries">
           <span>{{ country.name }}</span>
         </li>
       </ul>
+
+
 
       </div>
 

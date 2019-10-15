@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return this.countries.reduce((sum, country) => {return sum + country.population}, 0);
       }
     },
+    mounted() {
+      this.fetchCountries();
+    },
     methods: {
       fetchCountries: function(){
         fetch("https://restcountries.eu/rest/v2/all")
