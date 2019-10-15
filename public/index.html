@@ -6,31 +6,42 @@
     <script type="text/javascript" src="./js/bundle.js"></script>
     <title>Countries API</title>
   </head>
-  <body>
 
+  <body>
     <div id="app">
+
       <h1>Countries</h1>
       <p>Total population: {{ totalPopulation }}</p>
 
-      <form id="select-country">
-        <label for="country">Choose a Country for more information:</label>
-        <select id="country">
-          <option v-for="(country, index) in countries">{{ country.name }}</option>
+        <label for="country">Choose a country for more info:</label>
+        <select id="country" v-model="selectedCountry">
+          <option disabled value="">select a country</option>
+          <option v-for="(country, index) in countries" :value="country">{{ country.name }}</option>
         </select>
-        <input type="submit" value="show me this country">
-      </form>
 
-        <ul>
+      <div id="selected-country" v-if="selectedCountry">
+        <p>{{ selectedCountry.name }}</p>
+        <img class="flag" :src="selectedCountry.flag" alt="flag" />
+        <button type="submit" v-if="!favouriteCountries.includes(selectedCountry)"
+        v-on:click="addToFavourites">Add to favourites</button>
+      </div>
+
+      <h2>Favourite countries:</h2>
+      <ul>
+        <li v-for="country in favouriteCountries">
+          <p>{{ country.name }}</p>
+          <img class="flag" :src="country.flag" alt="flag" />
+        </li>
+      </ul>
+
+      <h2>All countries:</h2>
+      <ul>
         <li v-for="(country, index) in countries">
           <span>{{ country.name }}</span>
         </li>
       </ul>
 
-
-
-      </div>
-
     </div>
-
   </body>
+
 </html>
